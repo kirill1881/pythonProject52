@@ -11,5 +11,5 @@ urlpatterns = [
     path('addorder/', views.postorder),
     path('allorders/', views.get_all_orders),
     path('notrecived/', views.get_not_recived_order),
-    path('/setrecived')
+
 ]
