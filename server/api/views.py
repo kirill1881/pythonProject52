@@ -16,7 +16,7 @@ from .helpers import OrderToShow
 @api_view(('GET',))
 @renderer_classes((TemplateHTMLRenderer, JSONRenderer))
 def get_all(request):
-    serializer = serializers.serialize('json', ItemModel.objects.all())
+    serializer = serializers.serialize('json', Person.objects.all())
     print(serializer)
     return HttpResponse(serializer, content_type='application/json')
 
@@ -34,9 +34,9 @@ def post(request):
 def postuser(request):
     item = Person()
     item.name = request.POST.get('name')
-    item.surname = request.POST.get('price')
-    item.citizenship = request.POST.get('weight')
-    item.number = request.POST.get('weight')
+    item.surname = request.POST.get('surname')
+    item.citizenship = request.POST.get('adres')
+    item.number = request.POST.get('number')
     Person.save(item)
     print(len(ItemModel.objects.all()))
     return render(request, 'index.html')
@@ -51,10 +51,18 @@ def postorder(request):
     print(len(ItemModel.objects.all()))
     return render(request, 'index.html')
 
+def get_all_orders(request):
+    oreders = Order.objects.all()
+    serializer = serializers.serialize('json', oreders)
+    return HttpResponse(serializer, content_type='application/json')
+
 def get_not_recived_order(request):
     oreders = Order.objects.filter(if_get = False)
-    l = []
-    for i in oreders:
-        l.append(OrderToShow(i.item_id, i.user_id))
-    serializer = serializers.serialize('json', l)
+    serializer = serializers.serialize('json', oreders)
     return HttpResponse(serializer, content_type='application/json')
+
+def set_recived(request):
+    id = request.POST.get('id')
+    order = Order.objects.filter(id = id)
+    order.if_get = True
+    Order.save(order)

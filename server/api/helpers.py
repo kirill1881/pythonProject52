@@ -14,3 +14,7 @@ class OrderToShow:
         adress = person.citizenship
         item_name = item.product_name
 
+        class Meta:
+            model = OrderToShow
+            fields = '__all__'
+

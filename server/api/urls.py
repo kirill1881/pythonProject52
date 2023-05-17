@@ -7,7 +7,9 @@ from . import views
 urlpatterns = [
     path('', views.get_all),
     path('add/', views.post),
-    path('adduser/', views.post),
+    path('adduser/', views.postuser),
     path('addorder/', views.postorder),
-    path('notrecived/', views.get_not_recived_order)
+    path('allorders/', views.get_all_orders),
+    path('notrecived/', views.get_not_recived_order),
+    path('/setrecived')
 ]
