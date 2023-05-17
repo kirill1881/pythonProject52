@@ -11,5 +11,7 @@ urlpatterns = [
     path('addorder/', views.postorder),
     path('allorders/', views.get_all_orders),
     path('notrecived/', views.get_not_recived_order),
-
+    path('getuser/<int:pk>', views.get_user_by_id),
+    path('getitem/<int:pk>', views.get_item_by_id),
+    path('recive/', views.set_recived)
 ]

@@ -61,8 +61,25 @@ def get_not_recived_order(request):
     serializer = serializers.serialize('json', oreders)
     return HttpResponse(serializer, content_type='application/json')
 
+
+
+@csrf_exempt
 def set_recived(request):
     id = request.POST.get('id')
-    order = Order.objects.filter(id = id)
+    order = Order.objects.filter(id = id)[0]
+    print(order)
     order.if_get = True
     Order.save(order)
+    l = [order]
+    serializer = serializers.serialize('json', l)
+    return HttpResponse(serializer, content_type='application/json')
+
+def get_user_by_id(request, pk):
+    user = Person.objects.filter(id = pk)
+    serializer = serializers.serialize('json', user)
+    return HttpResponse(serializer, content_type='application/json')
+
+def get_item_by_id(request, pk):
+    user = ItemModel.objects.filter(id = pk)
+    serializer = serializers.serialize('json', user)
+    return HttpResponse(serializer, content_type='application/json')
