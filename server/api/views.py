@@ -31,12 +31,21 @@ def post(request):
     return render(request, 'index.html')
 
 @csrf_exempt
+def get_user_role(request):
+    name = request.POST.get('name')
+    surname = request.POST.get('surname')
+    items = Person.objects.filter(name = name, surname = surname)
+    serializer = serializers.serialize('json', items)
+    return HttpResponse(serializer, content_type='application/json')
+
+@csrf_exempt
 def postuser(request):
     item = Person()
     item.name = request.POST.get('name')
     item.surname = request.POST.get('surname')
     item.citizenship = request.POST.get('adres')
     item.number = request.POST.get('number')
+    item.role = request.POST.get('role')
     Person.save(item)
     print(len(ItemModel.objects.all()))
     return render(request, 'index.html')

@@ -13,5 +13,6 @@ urlpatterns = [
     path('notrecived/', views.get_not_recived_order),
     path('getuser/<int:pk>', views.get_user_by_id),
     path('getitem/<int:pk>', views.get_item_by_id),
-    path('recive/', views.set_recived)
+    path('recive/', views.set_recived),
+    path('getuser/', views.get_user_role)
 ]
